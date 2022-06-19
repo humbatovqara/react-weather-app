@@ -1,9 +1,15 @@
 import './App.css';
+import { CityProvider } from './Context/CityContext';
+import Cards from './Components/Cards';
+import Header from './Components/Header';
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello React</h1>
+      <CityProvider>
+        <Header />
+        <Cards />
+      </CityProvider>
     </div>
   );
 }
