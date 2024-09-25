@@ -1,23 +1,24 @@
-import { createContext, useState } from "react";
-import citiesJSON from '../data/cityOfAzerbaijan.json';
+import { createContext, useContext, useState } from "react";
+import citiesJSON from "../data/cityOfAzerbaijan.json";
 
 const CityContext = createContext();
 
 export const CityProvider = ({ children }) => {
-    const [weather, setweather] = useState([]);
-    const [city, setCity] = useState(citiesJSON);
-    
-    const values = {
-        city, 
-        setCity,
-        citiesJSON,
-        weather,
-        setweather
-    }
+  const [weather, setWeather] = useState(null);
+  const [city, setCity] = useState(citiesJSON[0]);
 
-    return <CityContext.Provider value={values}>
-        {children}
-    </CityContext.Provider>
-}
+  const values = {
+    city,
+    setCity,
+    citiesJSON,
+    weather,
+    setWeather,
+  };
 
-export default CityContext;
+  return <CityContext.Provider value={values}>{children}</CityContext.Provider>;
+};
+
+// export default CityContext;
+
+// Custom Context Hook
+export const useCity = () => useContext(CityContext);

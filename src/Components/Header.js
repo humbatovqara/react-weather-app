@@ -1,12 +1,14 @@
-import { useContext } from 'react';
-import CityContext from '../Context/CityContext';
+// import { useContext } from 'react';
+// import CityContext from '../Context/CityContext';
+import { useCity } from "../Context/CityContext";
 
 function Header() {
-    const { city, setCity, citiesJSON } = useContext(CityContext);
+    // const { city, setCity, citiesJSON } = useContext(CityContext);
+    const {city, setCity, citiesJSON} = useCity();
 
     const changeCity = (e) => {
-        console.log(e.target.value);
-        setCity(e.target.value);
+        const selectedCity = citiesJSON.find((item) => item.name === e.target.value);
+        setCity(selectedCity);
     }
 
     return (
@@ -14,7 +16,7 @@ function Header() {
             <select
                 name="cities"
                 id="cities"
-                value={city.name}
+                value={city?.name}
                 onChange={changeCity}
             >
                 {citiesJSON.map((item, i) => {
